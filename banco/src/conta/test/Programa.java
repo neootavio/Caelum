@@ -38,6 +38,7 @@ public class Programa {
         conta3.saca(100);
 
         System.out.println(conta3);
+        System.out.println(cliente2);
 
     }
 }
