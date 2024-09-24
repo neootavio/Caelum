@@ -4,33 +4,48 @@ import java.sql.SQLOutput;
 
 public abstract class Conta {
 
+
+    public static int identificador;
+
+    public Conta(){
+        identificador++;
+    }
+
+
     int numero;
     String cliente;
     double saldo;
 
-    public void deposita(double valor){
-        if(valor <= 0){
+    public boolean deposita(double valor) {
+        if (valor <= 0) {
             System.out.println("Valor inválido!");
+            return false;
         } else {
             this.saldo += valor;
             System.out.println("Depósito de R$" + valor + " foi realizado com sucesso.");
+            return true;
         }
-
     }
-    public void saca(double valor){
-        if(this.saldo < valor){
+
+    public boolean saca(double valor) {
+        if (this.saldo < valor) {
 
             System.out.println("Saldo insuficiente");
+            return false;
 
         } else {
             this.saldo -= valor;
             System.out.println("Saque realizado com sucesso");
+            return true;
         }
 
     }
-    public void trasferePara(Conta conta, double valor){
-        saca(valor);
-        conta.deposita(valor);
+
+    public void trasferePara(Conta conta, double valor) {
+        if (saca(valor)) {
+            conta.deposita(valor);
+        }
+
     }
 
     public int getNumero() {
